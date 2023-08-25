@@ -2,6 +2,8 @@ package com.huawei.movie.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.antlr.v4.runtime.misc.NotNull;
 
 
 @Entity
@@ -13,6 +15,7 @@ public class Movie {
     private Long id;
     /* @Column(name = "ComingSoon")*/
     private Boolean comingSoon;
+
     private String title;
 
     private String year;
@@ -20,7 +23,9 @@ public class Movie {
     private String released;
     private String runtime;
     private String genre;
+
     private String director;
+
     private String writer;
     private String actors;
     private String plot;
@@ -29,9 +34,11 @@ public class Movie {
     private String awards;
     private String poster;
     private String metascore;
+
     private String imdbRating;
     private String imdbVotes;
     private String imdbID;
+
     private String type;
 
     public Long getId() {
