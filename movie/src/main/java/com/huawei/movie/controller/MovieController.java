@@ -60,6 +60,11 @@ public class MovieController {
         return new ResponseEntity<Movie>(existingMovie,HttpStatus.OK);
 
     }
+    @PostMapping("/add-movies-from-json")
+    public ResponseEntity<String> addMoviesFromJson() {
 
+        movieService.addMoviesFromJsonFile();
+        return ResponseEntity.ok("JSON verileri başarıyla eklendi.");
+    }
 
 }

@@ -1,5 +1,7 @@
 package com.huawei.movie.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.huawei.movie.model.Movie;
 import com.huawei.movie.repository.MovieRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -78,5 +80,21 @@ public class MovieService {
     }
 
 
+    private List<Movie> movies = new ArrayList<>();
+    public void addMoviesFromJsonFile() {
+        try {
+            ClassPathResource resource = new ClassPathResource("json/data.json");
+            Reader reader = new InputStreamReader(resource.getInputStream());
+
+            Gson gson = new GsonBuilder().create();
+            Movie[] moviesArray = gson.fromJson(reader, Movie[].class);
+
+            // elde ettigim movieArrayi movies e ekledim
+            Collections.addAll(movies, moviesArray);
+            movieRepository.saveAll(movies);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
