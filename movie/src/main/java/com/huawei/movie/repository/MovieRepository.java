@@ -9,10 +9,7 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie,Long> {
 
-   /* List<Movie> findByImdbRating(Double imdbRating);
-    List<Movie> findByDirectorContaining(String director);
-    List<Movie> findByTitle(String type);*/
-
+    List<Movie> findByTitleContaining(String title);
 
 
 }

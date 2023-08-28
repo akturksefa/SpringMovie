@@ -67,4 +67,25 @@ public class MovieController {
         return ResponseEntity.ok("JSON verileri başarıyla eklendi.");
     }
 
+    @GetMapping("/sorted-by-imdb-rating")
+    public List<Movie> getMoviesSortedByImdbRating() {
+        return movieService.getMoviesSortedByImdbRating();
+    }
+
+    @GetMapping("/sorted-by-director")
+    public List<Movie> getMoviesSortedByDirector(@RequestParam(defaultValue = "ASC") String direction) {
+        return movieService.getMoviesSortedByDirector(direction);
+    }
+
+    @GetMapping("/sorted-by-type")
+    public List<Movie> getMoviesSortedByType(@RequestParam(defaultValue = "ASC")String direction)
+    {
+        return movieService.getMoviesSortedByType(direction);
+    }
+
+    @GetMapping("/search-by-title")
+    public List<Movie> searchMoviesByTitle(@RequestParam String title) {
+        return movieService.searchMoviesByTitle(title);
+    }
+
 }

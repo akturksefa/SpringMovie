@@ -7,6 +7,7 @@ import com.huawei.movie.repository.MovieRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -96,5 +97,29 @@ public class MovieService {
             e.printStackTrace();
         }
     }
+
+    public List<Movie> getMoviesSortedByImdbRating() {
+        Sort sortByImdbRating = Sort.by(Sort.Direction.DESC, "imdbRating");
+        return movieRepository.findAll(sortByImdbRating);
+    }
+
+    public List<Movie> getMoviesSortedByDirector(String direction) {
+        Sort sort = Sort.by(Sort.Direction.fromString(direction), "director");
+        return movieRepository.findAll(sort);
+    }
+
+    public List<Movie> getMoviesSortedByType(String direction) {
+        Sort sort=Sort.by(Sort.Direction.fromString(direction),"type");
+        return movieRepository.findAll(sort);
+
+    }
+
+    public List<Movie> searchMoviesByTitle(String title) {
+        return movieRepository.findByTitleContaining(title);
+    }
+
+
+
+
 
 }
