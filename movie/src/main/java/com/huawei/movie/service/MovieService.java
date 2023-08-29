@@ -22,6 +22,9 @@ public class MovieService {
 
     @Autowired
     private  MovieRepository movieRepository;
+
+    public MovieService(MovieRepository movieRepository) { this.movieRepository=movieRepository;}
+
     public Movie addMovie(Movie movie)
     {
         return movieRepository.save(movie);
@@ -37,11 +40,9 @@ public class MovieService {
         return movieRepository.findById(movieId).get();
     }
 
-
     public Movie updateMovie(Long id,Movie movieRequest)
     {
         Movie existingMovie=movieRepository.findById(id).get();
-
         ////////////////////////////////////////////////////////////
         if (movieRequest.getTitle() != null){
             existingMovie.setTitle(movieRequest.getTitle());}
@@ -80,7 +81,6 @@ public class MovieService {
         movieRepository.deleteById(movieId);
     }
 
-
     private List<Movie> movies = new ArrayList<>();
     public void addMoviesFromJsonFile() {
         try {
@@ -90,7 +90,7 @@ public class MovieService {
             Gson gson = new GsonBuilder().create();
             Movie[] moviesArray = gson.fromJson(reader, Movie[].class);
 
-            // elde ettigim movieArrayi movies e ekledim
+
             Collections.addAll(movies, moviesArray);
             movieRepository.saveAll(movies);
         } catch (IOException e) {
@@ -117,9 +117,5 @@ public class MovieService {
     public List<Movie> searchMoviesByTitle(String title) {
         return movieRepository.findByTitleContaining(title);
     }
-
-
-
-
 
 }
