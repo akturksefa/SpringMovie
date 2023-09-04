@@ -1,0 +1,30 @@
+version: "3"
+services:
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+
+    networks:
+      - case-study
+    environment:
+      - MYSQL_ROOT_PASSWORD=Sefa2424
+      - MYSQL_DATABASE=mydb
+  app:
+    depends_on:
+      - db
+    image: movieapp:0.0.1
+    ports:
+      - "8090:8090"
+    networks:
+      - case-study
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url" : "jdbc:mysql://db:3306/mydb",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" : "Sefa2424"
+      }'
+
+networks:
+  case-study:
+
